@@ -1,0 +1,10 @@
+.Product{
+    border:1px lightcyan solid;
+    padding:3px;
+    border-radius: 4px;
+    margin: 10px;
+    transition: border-color 2s;
+}
+.Product:hover{
+    border-color:blue;
+}
