@@ -31,12 +31,13 @@ import "./product.css"
 //     )
 // }
 function Product({title,Price}){
-    
-    return(
-        <div className="Product">
+    let isDisount = Price>30000 ? <li>Disount:5%</li> : null; 
+    let styles = {backgroundColor: Price > 30000 ? "pink":null};
+    return( 
+        <div className="Product" style={styles}>
         <h3>title:{title}</h3>
         <h4>price:{Price}</h4>
-        
+        <p>{isDisount}</p>
         </div>
     )
 }
