@@ -1,0 +1,36 @@
+.Massage_Box{
+    display: flex;
+    flex-direction: column;
+    border: 1px white solid;
+    
+}
+#photo_Section{
+    width: 16rem;
+    height:16rem;
+    border-top-left-radius: 60%;
+    border-top-right-radius: 60%;
+    margin:10px 15px;
+    border-bottom-right-radius: 6%;
+    border-bottom-left-radius: 6%;;
+
+
+}
+#photo_Section:hover{
+    box-shadow: 1rem;
+    border-color: blue;
+    transition:0.4s;
+    
+}
+#greet_section{
+    text-orientation: 10%;
+    border-radius:9px;
+    border-bottom: none;
+    border-left:none;
+    border-right: none;
+    
+}
+.Massage_Box_container{
+    border: 1px yellowgreen solid;
+    margin: 0.7%;
+    border-radius: 4%;
+}
