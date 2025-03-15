@@ -43,10 +43,27 @@ import { v4 as uuidv4 } from 'uuid';
                 return {
                     ...todo,
                     task:todo.task.toUpperCase(),
-                }
+                };
+                
             })
         ))
 
+    }
+
+    let update_each = (id) =>{
+        setTodos((preValue) =>(
+            preValue.map((todo)=>{
+                if(todo.id === id ) {
+                    return {  //<-- select id from task
+                    ...todo,
+                    task:todo.task.toUpperCase(),
+                };
+            }
+                else{
+                    return todo;
+                }
+            })
+        ))
     }
 
     return (
@@ -65,10 +82,11 @@ import { v4 as uuidv4 } from 'uuid';
                             <span>
                             {todo.task}
                             </span> <button onClick={()=> delete_task(todo.id)}>delete</button>
+                            <button onClick={()=> update_each(todo.id)}>Big</button>
                             </li>
                     ))
                 }
-                <button onClick={upperCaseAll}>uppercase</button>
+                <button onClick={upperCaseAll}>UpperCase</button>
             </ul>
         </div>
     )
