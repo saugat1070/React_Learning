@@ -1,0 +1,10 @@
+.ticket{
+    border:1px pink solid;
+    width: 15rem;
+    border-radius: 5px;
+}
+.ticket span{
+    /* border: 1px yellowgreen dotted; */
+    margin:4px;
+   
+}
