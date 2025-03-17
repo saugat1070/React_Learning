@@ -6,4 +6,4 @@ function sum_array(arr){
     console.log(sum);
     return sum;
 }
-export {sum_array};
+export {sum_array}
