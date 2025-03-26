@@ -6,15 +6,14 @@ import Card from '../../components/card'
 function Home() {
   return (
     <Layout >
-        <div className=' ml-5 flex flex-row flex-wrap'>
+        <div className=' ml-5 flex justify-center flex-wrap space-x-5'>
         <Card/>
         <Card />
         <Card></Card>
         <Card></Card>
         <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
+        <Card/>
+       
         </div>
     </Layout> 
     )
