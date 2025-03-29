@@ -20,15 +20,19 @@ export default function Login() {
 
   const handleSubmit = async (event)=>{
     event.preventDefault();
+    const base_url = import.meta.env.VITE_BASE_URL;
     console.log("data submitted");
-    console.log(data);
+    // console.log(data);
     const response = await axios.post(
-      "https://react30.onrender.com/api/user/login",
+      //"https://react30.onrender.com/api/user/login"
+       `${base_url}/login`,
       data
     );
     console.log(response);
     try {
       if(response.status === 200){
+        // console.log(response.data.token);
+        localStorage.setItem('token',response.data.token); //set a token in local storage of browser with key name 'token'
         navigate('/');
       }
       else{

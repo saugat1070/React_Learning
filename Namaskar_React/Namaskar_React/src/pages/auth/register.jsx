@@ -22,29 +22,27 @@ function Register() {
   });
   }
   //sending data to backend
-  const handleSubmit = async (event)=>{
+  const handleSubmit = async (event) => {
+    const base_url = import.meta.env.VITE_BASE_URL;
+    console.log(base_url);
     event.preventDefault();
     console.log("data submitted");
     console.log(data);
-    const response = await axios.post(
-      "https://react30.onrender.com/api/user/register",
-      data
-    );
-    console.log(response);
     try {
-      if(response.status === 201){
+      const response = await axios.post(
+        `${base_url}/register`,
+        data
+      );
+      console.log(response);
+      if (response.status === 201) {
         navigate('/login');
-      }
-      else{
+      } else {
         alert("Registration Failed");
       }
-      
     } catch (error) {
-      alert(alert?.response?.data?.message);
-      
+      alert(error?.response?.data?.message || "An error occurred");
     }
-  }
-
+  };
 
   
 
