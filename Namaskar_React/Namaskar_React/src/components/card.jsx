@@ -3,7 +3,6 @@ import img from "../assets/IMG_1.jpg"
 import { Link } from "react-router-dom";
 
 function Card({blogs}) {
-    console.log(blogs)
 return (
     <Link to={`/blogs/${blogs._id}`}>
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mt-4 ml-4 ">
