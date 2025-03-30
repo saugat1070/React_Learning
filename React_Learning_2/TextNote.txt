@@ -24,3 +24,7 @@ Closure:-
  varibales.
  -> In Js, once a function completes its execution, any variables that were 
  defined inside the function scope cease to exist.
+
+ uuid:- for unique id generator
+ `npm install uuid;`
+ `import {uuidv4} from 'uuid';`

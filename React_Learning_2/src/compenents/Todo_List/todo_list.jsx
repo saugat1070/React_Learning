@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
  export default function Todo_List(){
 
     // let [todos,setTodos] = useState(["sample Task","Hi hello"]); <-- array method
-    let [todos,setTodos] = useState([{task:"sample of task",id:uuidv4()},]); // <-- array of object method
+    let [todos,setTodos] = useState([{task:"sample of task",id:uuidv4(),isDone:false}]); // <-- array of object method // isDone is added to find whether task is done or not
     let [newtodo,setNewtodo] = useState("");
 
     let addNewTask = () =>{
@@ -65,6 +65,19 @@ import { v4 as uuidv4 } from 'uuid';
             })
         ))
     }
+    let done_mark = (id, isDone) => {
+        setTodos((preValue) =>
+            preValue.map((todo) => {
+                if (todo.id === id) {
+                    return {
+                        ...todo,
+                        isDone: !isDone,
+                    };
+                }
+                return todo;
+            })
+        );
+    }
 
     return (
         <div className="Todo_List">
@@ -79,10 +92,11 @@ import { v4 as uuidv4 } from 'uuid';
                 {
                     todos.map((todo) => (
                         <li key={todo.id}>
-                            <span>
+                            <span style={todo.isDone ? { textDecoration: "line-through" } : { textDecoration: "none" }}>
                             {todo.task}
                             </span> <button onClick={()=> delete_task(todo.id)}>delete</button>
                             <button onClick={()=> update_each(todo.id)}>Big</button>
+                            <button onClick={()=> done_mark(todo.id,todo.isDone)}>done</button>
                             </li>
                     ))
                 }

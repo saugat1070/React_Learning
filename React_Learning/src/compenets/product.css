@@ -1,4 +1,4 @@
-.Product{
+/* .Product{
     border:1px lightcyan solid;
     padding:3px;
     border-radius: 4px;
@@ -7,4 +7,11 @@
 }
 .Product:hover{
     border-color:blue;
+} */
+
+.Product{
+    width: 20rem;
+    height: 20rem;
+    border:1px whitesmoke solid;
+    border-radius: 10%;
 }
