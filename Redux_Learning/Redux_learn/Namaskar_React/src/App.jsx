@@ -5,8 +5,6 @@ import Login from './pages/auth/login'
 import AddBlog from './pages/blog/AddBlog'
 import Register from './pages/auth/register'
 
-
-
 function App() {
  
 
