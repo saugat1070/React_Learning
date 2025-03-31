@@ -4,12 +4,14 @@ import Home from './pages/blog/Home'
 import Login from './pages/auth/login'
 import AddBlog from './pages/blog/AddBlog'
 import Register from './pages/auth/register'
-
+import {Provider} from 'react-redux' //<-- To connect redux and src
+import store from '../store/store'
 function App() {
  
 
   return (
-    <BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
       <Routes>
         <Route path='' element={<Home/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
@@ -17,6 +19,7 @@ function App() {
         <Route path='/addblog' element={<AddBlog/>}></Route>
       </Routes>
     </BrowserRouter>
+    </Provider>
   )
 }
 
