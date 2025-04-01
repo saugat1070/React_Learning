@@ -1,25 +1,33 @@
-import React from "react";
+import {React,useEffect,useState} from "react";
 import { register } from "../../../store/authSlice";
+import {useDispatch} from 'react-redux'
 function Register() {
-  const [data,setData] = ({
-    email:'',
-    username : '',
-    password : '',
-  })
+  const dispatch = useDispatch();
+  const [data, setData] = useState({
+    email: '',
+    username: '',
+    password: '',
+  });
   const handleChange = (event)=>{
     const {name,value} = event.target;
     setData(()=>{
-      return {...data,
+      return {
+        ...data,
       [name] : value
     }
       
     })
+    
   }
-  const handleSubmit =()=>{
-    if(data){
-      register(data);
-      
-    }
+  const handleSubmit =(event)=>{
+    event.preventDefault();
+    console.log(data);
+    dispatch(register(data));
+  setData({
+    email: '',
+    username: '',
+    password: '',
+  });
 
   }
   return (
@@ -31,7 +39,7 @@ function Register() {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="=email"
+            htmlFor="=email"
             >
               Email
             </label>
@@ -42,12 +50,13 @@ function Register() {
               placeholder="Email"
               name="email"
               onChange={handleChange}
+              value={data.email}
             />
           </div>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="username"
+            htmlFor="username"
             >
               username
             </label>
@@ -58,12 +67,13 @@ function Register() {
               placeholder="username"
               name="username"
               onChange={handleChange}
+              value={data.username}
             />
           </div>
           <div className="mb-6">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="password"
+            htmlFor="password"
             >
               Password
             </label>
@@ -74,6 +84,7 @@ function Register() {
               placeholder="***********"
               name="password"
               onChange={handleChange}
+              value={data.password}
             />
             <p className="text-red-500 text-xs italic">
               Please choose a password.
