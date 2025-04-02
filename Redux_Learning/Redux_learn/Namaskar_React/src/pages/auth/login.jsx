@@ -1,13 +1,15 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux';
 import { login } from '../../../store/authSlice';
 import { useState } from 'react';
 import STATUSES from "../../global/statuses";
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const data_from_redux = useSelector((state)=>state.auth);
   const {user,status,token} = data_from_redux;
+  console.log(status,token);
   const [data,setData] = useState({
     email:'',
     password:'',
@@ -25,15 +27,17 @@ export default function Login() {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    // console.log(data);
     dispatch(login(data));
-    
     if(status == STATUSES.SUCCESS){
-      localStorage.setItem('token',token); //set a token in local storage of browser with key name 'token'
-
+      console.log('eya ta aak cha nii');
+      localStorage.setItem('token',token);
+      navigate('/'); // Set a token in local storage of browser with key name 'token'
     }
-
+    else{
+      navigate('/login');
+    }
   }
+
   return (
     <div className="flex justify-center items-center mt-50">
       <div className="w-full max-w-xs flex justify-center content-center">
