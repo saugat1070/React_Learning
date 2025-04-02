@@ -1,11 +1,13 @@
 import {Link} from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { login } from '../../../store/authSlice';
 import { useState } from 'react';
-
+import STATUSES from "../../global/statuses";
 
 export default function Login() {
   const dispatch = useDispatch()
+  const data_from_redux = useSelector((state)=>state.auth);
+  const {user,status,token} = data_from_redux;
   const [data,setData] = useState({
     email:'',
     password:'',
@@ -17,23 +19,28 @@ export default function Login() {
       return {
         ...data,
         [name]:value,
-
       }
     })
   }
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    console.log(data);
+    // console.log(data);
     dispatch(login(data));
-  }
-  
-  
+    
+    if(status == STATUSES.SUCCESS){
+      localStorage.setItem('token',token); //set a token in local storage of browser with key name 'token'
 
+    }
+
+  }
   return (
     <div className="flex justify-center items-center mt-50">
       <div className="w-full max-w-xs flex justify-center content-center">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        onSubmit={handleSubmit}
+        >
+          <p className="flex flex-1/3">{data_from_redux?.data?.username}</p>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
