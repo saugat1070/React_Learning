@@ -1,13 +1,20 @@
-import {React,useEffect,useState} from "react";
+import {React,useEffect,useState,use} from "react";
 import { register } from "../../../store/authSlice";
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import STATUSES from "../../global/statuses";
+//To write information in redux --> useDispatch
+//To read information from redux --> useSelector
+
 function Register() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState({
     email: '',
     username: '',
     password: '',
   });
+  const data_redux = useSelector((state) => state.auth);
   const handleChange = (event)=>{
     const {name,value} = event.target;
     setData(()=>{
@@ -21,15 +28,19 @@ function Register() {
   }
   const handleSubmit =(event)=>{
     event.preventDefault();
-    console.log(data);
     dispatch(register(data));
-  setData({
-    email: '',
-    username: '',
-    password: '',
-  });
+    console.log(data_redux.status);
+    console.log(data_redux.user);
+    if(data_redux.status == STATUSES.SUCCESS){
+      navigate('/login');
+    }
+    else{
+      navigate('/register');
+    }
+
 
   }
+
   return (
     <div className="flex justify-center items-center mt-50">
       <div className="w-full max-w-xs flex justify-center content-center">
