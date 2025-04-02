@@ -6,7 +6,7 @@ const authSlice = createSlice({
     name : 'auth',
     initialState :{
         // email: null,
-        // username : null,
+        // username : null, 
         // password : null
         user : null,
         token : null,
@@ -31,28 +31,24 @@ const authSlice = createSlice({
 export const {setStatus,setUser,setToken} = authSlice.actions;
 export default authSlice.reducer;
 
-export  function register(data){
-    return async function registerThunk(dispatch){ 
-        dispatch(setStatus(STATUSES.LOADING))
+export function register(data) {
+    return async function registerThunk(dispatch) {
+        dispatch(setStatus(STATUSES.LOADING));
         try {
             const response = await axios.post(
                 "https://react30.onrender.com/api/user/register",
                 data
             );
-            if(response.status === 200){
-                dispatch(STATUSES.SUCCESS);
-                dispatch(setUser(data));
-        }
-        else{
+            if (response.status === 201) {
+                dispatch(setStatus(STATUSES.SUCCESS));
+                dispatch(setUser(response.data)); 
+            } else {
+                dispatch(setStatus(STATUSES.ERROR));
+            }
+        } catch (error) {
             dispatch(setStatus(STATUSES.ERROR));
         }
-        
-       } catch (error) {
-        dispatch(setStatus(STATUSES.ERROR));
-
-        
-       }
-    }
+    };
 }
 
 export function login(data){
@@ -64,7 +60,7 @@ export function login(data){
         );
         if(response.status === 200){
             dispatch(setToken(response?.data.token));
-            dispatch(STATUSES.SUCCESS);
+            dispatch(setStatus(STATUSES.SUCCESS));
         }
         else{
             dispatch(STATUSES.ERROR);
