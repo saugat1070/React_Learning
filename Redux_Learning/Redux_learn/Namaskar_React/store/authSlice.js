@@ -5,6 +5,7 @@ import STATUSES from '../src/global/statuses';
 const authSlice = createSlice({
     name : 'auth',
     initialState :{
+        //user_data -->
         // email: null,
         // username : null, 
         // password : null
@@ -61,6 +62,7 @@ export function login(data){
         if(response.status === 200){
             dispatch(setToken(response?.data.token));
             dispatch(setStatus(STATUSES.SUCCESS));
+            localStorage.setItem('token', response?.data.token);
         }
         else{
             dispatch(STATUSES.ERROR);
