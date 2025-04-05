@@ -1,7 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux';
-import { login } from '../../../store/authSlice';
-import { useState } from 'react';
+import { login, setStatus } from '../../../store/authSlice';
+import { useEffect, useState } from 'react';
 import STATUSES from "../../global/statuses";
 
 export default function Login() {
@@ -29,14 +29,16 @@ export default function Login() {
     e.preventDefault();
     dispatch(login(data));
     if(status == STATUSES.SUCCESS){
-      console.log('eya ta aak cha nii');
-      localStorage.setItem('token',token);
-      navigate('/'); // Set a token in local storage of browser with key name 'token'
-    }
-    else{
-      navigate('/login');
+    localStorage.setItem('token',token);
     }
   }
+  
+  useEffect(()=>{
+    if(status === STATUSES.SUCCESS){
+      navigate('/'); 
+      dispatch(setStatus(null));
+    }
+  },[status])
 
   return (
     <div className="flex justify-center items-center mt-50">
