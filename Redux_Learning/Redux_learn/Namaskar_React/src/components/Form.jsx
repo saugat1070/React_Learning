@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import AddBlog from '../pages/blog/AddBlog';
+// import BlogSlice from '../../store/blogSlice';
+import { BlogSlice } from '../../store/blogSlice';
 
 function Form({title}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const authData = useSelector((state)=>state.auth);
+    console.log(authData);
   const [data,setData] = useState({
     title:'',
     description:'',
@@ -13,11 +16,12 @@ function Form({title}) {
     subtitle:'',
     image:'',
   })
+
   const handleSubmit = (event)=>{
     event.preventDefault();
-    dispatch(AddBlog(data));
-    
-    
+    // dispatch(AddBlog(data));
+    // console.log(data);
+    dispatch(BlogSlice(data,authData));
   }
 
   const handleChange = (event)=>{
