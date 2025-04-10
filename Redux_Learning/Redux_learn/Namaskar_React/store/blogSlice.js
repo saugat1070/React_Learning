@@ -58,17 +58,42 @@ export function fetchBlog() {
         dispatch(setBlogStatus(STATUSES.LOADING));
         try {
             const response = await API.get('blog', data);
-            if (response.status === 200 && response.data.token) {
+            if (response.status === 200) {
+                console.log("i am within response");
                 // dispatch(setData(data));
                 console.log(response.data)
                 dispatch(setData(response.data.data));
-                dispatch(setBlogStatus(STATUSES.LOADING));
+                dispatch(setBlogStatus(STATUSES.SUCCESS));
             }
             else {
+                console.log("i am exception")
                 dispatch(setBlogStatus(STATUSES.ERROR));
             }
         } catch (error) {
             dispatch(setBlogStatus(STATUSES.ERROR));
+            console.log("i am error!")
+        }
+    }
+}
+
+export function singleBlog(id){
+    return async function singleBlogThunk(dispatch){
+        dispatch(setStatus(STATUSES.LOADING));
+        try {
+            console.log(id);
+            const response = await API.get(`blog/${id}`);
+            if(response === 200){
+                console.log(response.data.data)
+                dispatch(setData(response.data.data));
+                dispatch(setStatus(STATUSES.SUCCESS));
+            }
+            else{
+                dispatch(setStatus(STATUSES.ERROR))
+            }
+            
+        } catch (error) {
+            dispatch(setStatus(STATUSES.ERROR));
+            
         }
     }
 }
