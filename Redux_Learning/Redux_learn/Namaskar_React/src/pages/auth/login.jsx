@@ -35,6 +35,7 @@ export default function Login() {
   
   useEffect(()=>{
     if(status === STATUSES.SUCCESS){
+      console.log("Am I belong here!");
       navigate('/'); 
       dispatch(setStatus(null));
     }
